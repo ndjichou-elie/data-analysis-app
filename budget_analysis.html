@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Analysis</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Budget Analysis</h1>
+    </header>
+    <main>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% else %}
+            <div class="data-preview">
+                {{ category_totals|safe }}
+            </div>
+        {% endif %}
+    </main>
+    <footer>
+        <a href="{% url 'financial-analysis' %}" class="button">Back to Financial Analysis</a>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enable 2FA</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Enable Two-Factor Authentication</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Secure Your Account with 2FA</h2>
+            <p>
+                Two-Factor Authentication (2FA) adds an extra layer of security to your account.
+                Once enabled, you will be required to verify your identity using a secondary method
+                (e.g., a mobile authentication app or email verification) in addition to your password.
+            </p>
+            <p>Click the button below to start setting up your 2FA:</p>
+            
+            <!-- Form to expand into dynamic functionality -->
+            <form method="post" action="{% url 'enable-2fa' %}">
+                {% csrf_token %}
+                <label for="auth-method" data-tooltip="Choose your preferred method for authentication.">
+                    Select Authentication Method:
+                </label>
+                <select id="auth-method" name="auth_method" required>
+                    <option value="" disabled selected>-- Select Method --</option>
+                    <option value="app">Authentication App (e.g., Google Authenticator)</option>
+                    <option value="email">Email Verification</option>
+                </select>
+                <button type="submit" onclick="return confirm('Are you sure you want to enable 2FA?');">
+                    Enable 2FA
+                </button>
+            </form>
+
+            <!-- Dynamic functionality placeholder -->
+            <div id="setup-instructions" style="display: none; margin-top: 20px;">
+                <h3>Setup Instructions</h3>
+                <p id="instructions">Follow the steps to complete your 2FA setup...</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Data Analysis Application. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript for dynamic functionality
+        const authMethodSelect = document.getElementById('auth-method');
+        const setupInstructions = document.getElementById('setup-instructions');
+        const instructions = document.getElementById('instructions');
+
+        authMethodSelect.addEventListener('change', function () {
+            const method = authMethodSelect.value;
+            setupInstructions.style.display = 'block';
+
+            if (method === 'app') {
+                instructions.textContent = `
+                    Download an authenticator app (e.g., Google Authenticator or Authy).
+                    Scan the QR code provided on the next screen or enter the setup key manually.
+                `;
+            } else if (method === 'email') {
+                instructions.textContent = `
+                    A verification code will be sent to your registered email address.
+                    Enter the code on the next screen to complete the setup.
+                `;
+            } else {
+                setupInstructions.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

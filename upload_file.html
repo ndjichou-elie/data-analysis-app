@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Data</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <style>
+        /* Tooltip Styles */
+        label[data-tooltip] {
+            position: relative;
+            cursor: help;
+        }
+
+        label[data-tooltip]::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        label[data-tooltip]:hover::after {
+            opacity: 1;
+        }
+
+        .success-message {
+            color: green;
+            font-weight: bold;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+
+        .data-summary, .data-preview {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            margin-top: 10px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Upload and Analyze Data</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'upload-file' %}">Upload Data</a></li>
+                <li><a href="{% url 'analysis-tools' %}">Analysis Tools</a></li>
+                <li><a href="{% url 'reports' %}">Reports</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="upload-section">
+            <h2>Upload Your Dataset</h2>
+            <form enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                <label for="file" data-tooltip="Upload your data file in CSV, XLSX, or JSON format.">Upload File:</label>
+                <input type="file" id="file" name="file" accept=".csv, .xls, .xlsx, .json" required>
+                <button type="submit">Upload</button>
+            </form>
+
+            {% if message %}
+                <p class="success-message">{{ message }}</p>
+            {% endif %}
+            
+            {% if error %}
+                <p class="error-message">{{ error }}</p>
+            {% endif %}
+        </section>
+
+        {% if summary %}
+            <section class="summary-section">
+                <h2>Data Summary</h2>
+                <div class="data-summary">
+                    {{ summary|safe }}
+                </div>
+            </section>
+        {% endif %}
+        
+        {% if preview %}
+            <section class="preview-section">
+                <h2>Data Preview</h2>
+                <div class="data-preview">
+                    {{ preview|safe }}
+                </div>
+            </section>
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2025 Data Analysis Application. All rights reserved.</p>
+    </footer>
+</body>
+</html>

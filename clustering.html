@@ -1,0 +1,8 @@
+<!-- clustering.html -->
+{% if error %}
+<p style="color: red;">{{ error }}</p>
+{% else %}
+<h2>Clustering Results</h2>
+<div>{{ results|safe }}</div>
+<a href="{% url 'download-results' 'clustering' %}" class="button">Download Results</a>
+{% endif %}

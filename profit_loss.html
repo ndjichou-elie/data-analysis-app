@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit and Loss</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Profit and Loss Calculations</h1>
+    </header>
+    <main>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% else %}
+            <div class="data-preview">
+                {{ preview|safe }}
+            </div>
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2025 Financial Analysis Application</p>
+    </footer>
+</body>
+</html>

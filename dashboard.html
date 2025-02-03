@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome, {{ request.user.username }}</h1>
+        <div class="auth">
+            <a href="{% url 'logout' %}">Log Out</a>
+        </div>
+    </header>
+    <main>
+        <div class="main-options">
+            <a href="{% url 'data-analysis' %}" class="button-large">Data Analysis</a>
+            <a href="{% url 'financial-analysis' %}" class="button-large">Financial Analysis</a>
+        </div>
+        <div>
+            <h3>Two-Factor Authentication</h3>
+            <a href="{% url 'enable-2fa' %}" class="button-large">Enable 2FA</a>
+        </div>
+    </main>
+</body>
+</html>

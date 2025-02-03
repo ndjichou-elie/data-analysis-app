@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Tools</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Analysis Tools</h1>
+    </header>
+    <main>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% else %}
+            <h2>Data Preview</h2>
+            <div class="data-preview">{{ preview|safe }}</div>
+
+            <h2>Summary Statistics</h2>
+            <div class="summary-statistics">{{ summary|safe }}</div>
+        {% endif %}
+    </main>
+    <footer>
+        <a href="{% url 'home' %}" class="button">Back to Home</a>
+    </footer>
+</body>
+</html>

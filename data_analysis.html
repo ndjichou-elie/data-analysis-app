@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analysis Options</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Data Analysis Options</h1>
+    </header>
+    <main>
+        <div class="options-vertical">
+            <ul>
+                <li><a href="{% url 'upload-file' %}" class="button">Upload Data</a></li>
+                <li><a href="{% url 'preprocess-data' %}" class="button">Preprocess Data</a></li>
+                <li><a href="{% url 'analysis-tools' %}" class="button">Data Analysis Tools</a></li>
+                <li><a href="{% url 'reports' %}" class="button">Reports</a></li>
+                <li><a href="{% url 'visualization' %}" class="button">Visualization</a></li>
+                <li><a href="{% url 'predictive-modeling' %}" class="button">Predictive Modeling</a></li>
+                <li><a href="{% url 'classification' %}" class="button">Classification</a></li>
+                <li><a href="{% url 'clustering' %}" class="button">Clustering</a></li>
+
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Data Analysis Application. All rights reserved.</p>
+    </footer>
+</body>
+</html>

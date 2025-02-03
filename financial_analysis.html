@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Financial Analysis{% endblock %}
+
+{% block content %}
+<h1>Financial Analysis</h1>
+
+<!-- Form for uploading financial data -->
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="file">Upload Financial Data:</label>
+    <input type="file" name="file" id="file" accept=".csv, .xls, .xlsx, .json" required>
+    <button type="submit">Upload</button>
+</form>
+
+<!-- Data Preview Section -->
+{% if preview %}
+<h2>Data Preview</h2>
+<div class="data-preview">
+    {{ preview|safe }}
+</div>
+{% endif %}
+
+<!-- Data Summary Section -->
+{% if summary %}
+<h2>Data Summary</h2>
+<div class="data-summary">
+    {{ summary|safe }}
+</div>
+{% endif %}
+
+<!-- Financial Analysis Options -->
+<h2>Financial Analysis Options</h2>
+<ul class="options-vertical">
+    <li><a href="{% url 'profit-loss' %}" class="button">Profit/Loss</a></li>
+    <li><a href="{% url 'budget-analysis' %}" class="button">Budget Analysis</a></li>
+    <li><a href="{% url 'financial-kpis' %}" class="button">Financial KPIs</a></li>
+    <li><a href="{% url 'financial-statements' %}" class="button">Financial Statements</a></li>
+</ul>
+
+<!-- Back to Home Link -->
+<a href="{% url 'home' %}" class="button">Back to Home</a>
+{% endblock %}

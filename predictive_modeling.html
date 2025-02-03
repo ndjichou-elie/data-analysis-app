@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Modeling</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Predictive Modeling</h1>
+    </header>
+    <main>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% else %}
+            <form method="post">
+                {% csrf_token %}
+                <label for="target">Select Target Variable:</label>
+                <select name="target" id="target" required>
+                    {% for column in columns %}
+                        <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="features">Select Feature(s):</label>
+                <select name="features" id="features" multiple required>
+                    {% for column in columns %}
+                        <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="model_type">Select Model:</label>
+                <select name="model_type" id="model_type" required>
+                    <option value="linear_regression">Linear Regression</option>
+                    <option value="decision_tree">Decision Tree</option>
+                    <option value="svm">Support Vector Machine (SVM)</option>
+                </select>
+
+                <!-- Decision Tree Hyperparameters -->
+                <div id="dt_hyperparameters" style="display: none;">
+                    <label for="max_depth">Max Depth (optional):</label>
+                    <input type="number" name="max_depth" id="max_depth" placeholder="e.g., 5">
+
+                    <label for="min_samples_split">Min Samples Split:</label>
+                    <input type="number" name="min_samples_split" id="min_samples_split" value="2">
+                </div>
+
+                <!-- SVM Hyperparameters -->
+                <div id="svm_hyperparameters" style="display: none;">
+                    <label for="kernel">Kernel:</label>
+                    <select name="kernel" id="kernel">
+                        <option value="rbf">RBF</option>
+                        <option value="linear">Linear</option>
+                        <option value="poly">Polynomial</option>
+                    </select>
+
+                    <label for="C">C (Regularization Parameter):</label>
+                    <input type="number" name="C" id="C" step="0.1" value="1.0">
+                </div>
+
+                <button type="submit">Run Model</button>
+            </form>
+
+            {% if model_results %}
+                <h2>Results</h2>
+                {% if model_results.mse %}
+                    <p><strong>Mean Squared Error:</strong> {{ model_results.mse }}</p>
+                {% endif %}
+                {% if model_results.accuracy %}
+                    <p><strong>Accuracy:</strong> {{ model_results.accuracy }}</p>
+                {% endif %}
+                <h2>Predictions</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Actual</th>
+                            <th>Predicted</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for index, row in model_results.predictions.iterrows %}
+                            <tr>
+                                <td>{{ row.Actual }}</td>
+                                <td>{{ row.Predicted }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2025 Data Analysis Application</p>
+    </footer>
+    <script>
+        // Show/hide hyperparameter fields based on selected model
+        document.querySelector('#model_type').addEventListener('change', function(e) {
+            const modelType = e.target.value;
+            document.getElementById('dt_hyperparameters').style.display = (modelType === 'decision_tree') ? 'block' : 'none';
+            document.getElementById('svm_hyperparameters').style.display = (modelType === 'svm') ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbox Test</title>
+    <style>
+        #chat-container {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            display: block;
+        }
+
+        #messages {
+            overflow-y: auto;
+            max-height: 200px;
+            margin-bottom: 10px;
+        }
+
+        #user-input {
+            width: 80%;
+            margin-right: 5px;
+        }
+
+        #send-button {
+            width: 15%;
+        }
+    </style>
+</head>
+<body>
+        <div id="debug">Debugging content here</div>
+    <div id="chat-container">
+    <div id="chat-box">
+        <div id="messages"></div>
+        <input type="text" id="user-input" placeholder="Type your message..." />
+        <button id="send-button">Send</button>
+    </div>
+</div>
+
+    </div>
+    <script>
+        document.getElementById('send-button').addEventListener('click', () => {
+            const message = document.getElementById('user-input').value;
+            alert('Message sent: ' + message);
+        });
+    </script>
+</body>
+</html>

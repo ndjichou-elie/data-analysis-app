@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Preprocessing</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Data Preprocessing</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/upload/">Upload Data</a></li>
+                <li><a href="/analysis/">Analysis Tools</a></li>
+                <li><a href="/reports/">Reports</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+        {% if message %}
+            <p style="color: green;">{{ message }}</p>
+        {% endif %}
+        {% if preview %}
+            <h2>Data Preview:</h2>
+            {{ preview|safe }}
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <label for="action">Action:</label>
+            <select name="action" id="action">
+                <option value="remove_missing_rows">Remove Missing Rows</option>
+                <option value="remove_missing_cols">Remove Missing Columns</option>
+                <option value="fill_missing_mean">Fill Missing Values with Mean</option>
+                <option value="fill_missing_median">Fill Missing Values with Median</option>
+                <option value="remove_duplicates">Remove Duplicates</option>
+                <option value="convert_to_int">Convert Column to Integer</option>
+                <option value="convert_to_float">Convert Column to Float</option>
+                <option value="convert_to_string">Convert Column to String</option>
+            </select>
+            <input type="text" name="column" placeholder="Column Name (optional)">
+            <button type="submit">Apply</button>
+        </form>
+    </main>
+</body>
+</html>

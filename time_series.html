@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time-Series Analysis</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Time-Series Analysis</h1>
+        <a href="/">Back to Home</a>
+    </header>
+    <main>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% elif message %}
+            <p style="color: green;">{{ message }}</p>
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <label for="column">Select Time-Series Column:</label>
+            <select id="column" name="column" required>
+                {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <label for="method">Select Method:</label>
+            <select id="method" name="method" required>
+                <option value="moving_average">Moving Average</option>
+                <option value="exponential_smoothing">Exponential Smoothing</option>
+                <option value="arima">ARIMA</option>
+            </select>
+            <br><br>
+            <label for="forecast_steps">Forecast Steps:</label>
+            <input type="number" id="forecast_steps" name="forecast_steps" value="5" required>
+            <br><br>
+            <button type="submit">Analyze</button>
+        </form>
+        {% if chart %}
+            <h2>Time-Series Analysis Chart:</h2>
+            <div id="chart">{{ chart|safe }}</div>
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2025 Data Analysis Application. All rights reserved.</p>
+    </footer>
+</body>
+</html>

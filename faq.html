@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}FAQ - Data Analysis App{% endblock %}
+
+{% block content %}
+<h1>Frequently Asked Questions (FAQ)</h1>
+
+<section>
+    <ul>
+        <li>
+            <strong>How do I upload a file?</strong>
+            <p>
+                Navigate to the <a href="{% url 'upload-file' %}">Upload File</a> page. 
+                Click the "Choose File" button, select your data file (CSV, XLSX, or JSON), and then click "Upload."
+                Ensure the file follows the correct format for accurate analysis.
+            </p>
+        </li>
+        <li>
+            <strong>What file types are supported?</strong>
+            <p>
+                Supported file types include:
+                <ul>
+                    <li>CSV (Comma-Separated Values)</li>
+                    <li>XLSX (Excel Files)</li>
+                    <li>JSON (JavaScript Object Notation)</li>
+                </ul>
+                Files must contain structured data with headers in the first row.
+            </p>
+        </li>
+        <li>
+            <strong>How do I perform predictive modeling?</strong>
+            <p>
+                Navigate to the <a href="{% url 'predictive-modeling' %}">Predictive Modeling</a> page. 
+                Select the target column, choose the features, specify the model type 
+                (e.g., Linear Regression, Decision Tree, or SVM), and click "Run Analysis."
+                The system will process your data and provide results, including predictions and error metrics.
+            </p>
+        </li>
+        <li>
+            <strong>What features does the app provide?</strong>
+            <p>
+                Key features include:
+                <ul>
+                    <li>Data Upload and Preprocessing</li>
+                    <li>Predictive Modeling (Regression and Classification)</li>
+                    <li>Data Visualization</li>
+                    <li>Customizable Reports</li>
+                    <li>Time-Series Analysis</li>
+                </ul>
+            </p>
+        </li>
+        <li>
+            <strong>How can I enable Two-Factor Authentication (2FA)?</strong>
+            <p>
+                Go to the <a href="{% url 'enable-2fa' %}">Enable 2FA</a> page under your account settings. 
+                Follow the instructions to link your authentication method.
+            </p>
+        </li>
+        <li>
+            <strong>What if I encounter an error?</strong>
+            <p>
+                If you encounter any issues:
+                <ul>
+                    <li>Ensure your file is in a supported format and has a valid structure.</li>
+                    <li>Refer to tooltips provided on pages for guidance.</li>
+                    <li>If issues persist, contact support at <a href="mailto:support@dataanalysisapp.com">support@dataanalysisapp.com</a>.</li>
+                </ul>
+            </p>
+        </li>
+        <li>
+            <strong>How secure is my data?</strong>
+            <p>
+                Your data is securely processed and stored. We follow best practices to ensure data privacy and integrity. 
+                Uploaded files are not shared with third parties.
+            </p>
+        </li>
+        <li>
+            <strong>How can I access detailed reports?</strong>
+            <p>
+                Navigate to the <a href="{% url 'reports' %}">Reports</a> page. You can view summaries and download detailed reports in various formats.
+            </p>
+        </li>
+    </ul>
+</section>
+
+{% endblock %}

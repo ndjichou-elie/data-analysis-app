@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Engineering</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Feature Engineering</h1>
+        <a href="/">Back to Home</a>
+    </header>
+    <main>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: green;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        {% if preview %}
+            <h2>Preview:</h2>
+            {{ preview|safe }}
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <label for="selected_columns">Select Columns:</label><br>
+            <select id="selected_columns" name="selected_columns" multiple required>
+                {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <label for="transformation">Select Transformation:</label><br>
+            <select id="transformation" name="transformation" required>
+                <option value="polynomial">Polynomial Features</option>
+                <option value="onehot">One-Hot Encoding</option>
+            </select>
+            <br><br>
+            <label for="degree">Degree (for Polynomial Features):</label><br>
+            <input type="number" id="degree" name="degree" value="2">
+            <br><br>
+            <button type="submit">Apply Transformation</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2025 Data Analysis Application. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Engineering</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Feature Engineering</h1>
+        <a href="/">Back to Home</a>
+    </header>
+    <main>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: green;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        {% if preview %}
+            <h2>Preview:</h2>
+            {{ preview|safe }}
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <label for="selected_columns">Select Columns:</label><br>
+            <select id="selected_columns" name="selected_columns" multiple required>
+                {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <label for="transformation">Select Transformation:</label><br>
+            <select id="transformation" name="transformation" required>
+                <option value="polynomial">Polynomial Features</option>
+                <option value="onehot">One-Hot Encoding</option>
+            </select>
+            <br><br>
+            <label for="degree">Degree (for Polynomial Features):</label><br>
+            <input type="number" id="degree" name="degree" value="2">
+            <br><br>
+            <button type="submit">Apply Transformation</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2025 Data Analysis Application. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
+        </div>
+        <h1>Welcome to the Application</h1>
+    </header>
+    
+    <main>
+        <div class="auth-options">
+            <a href="{% url 'signup' %}" class="button-large">Sign Up</a>
+            <a href="{% url 'login' %}" class="button-large">Log In</a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Your Application</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Data Visualizations</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Interactive Data Visualizations</h1>
+        <a href="/">Back to Home</a>
+    </header>
+    <main>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% else %}
+            <form method="POST">
+                {% csrf_token %}
+                <label for="analysis_type">Select Visualization Type:</label>
+                <select id="analysis_type" name="analysis_type" required>
+                    <option value="scatter">Scatter Plot</option>
+                    <option value="line">Line Plot</option>
+                    <option value="heatmap">Correlation Heatmap</option>
+                </select>
+                <br><br>
+                <label for="column_x">X-Axis Column:</label>
+                <input type="text" id="column_x" name="column_x" required>
+                <br><br>
+                <label for="column_y">Y-Axis Column (Optional):</label>
+                <input type="text" id="column_y" name="column_y">
+                <br><br>
+                <button type="submit">Generate Visualization</button>
+            </form>
+
+            {% if scatter_plot %}
+                <h2>Scatter Plot:</h2>
+                <div id="scatter_plot">{{ scatter_plot|safe }}</div>
+            {% endif %}
+
+            {% if line_plot %}
+                <h2>Line Plot:</h2>
+                <div id="line_plot">{{ line_plot|safe }}</div>
+            {% endif %}
+
+            {% if heatmap %}
+                <h2>Correlation Heatmap:</h2>
+                <div id="heatmap">{{ heatmap|safe }}</div>
+            {% endif %}
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2025 Data Analysis Application. All rights reserved.</p>
+    </footer>
+</body>
+</html>
